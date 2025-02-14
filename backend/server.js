@@ -12,15 +12,10 @@ const app = express();
 connectDB();
 
 // Middleware
-const allowedOrigins = [
-  'https://fitness-tracker-five-phi.vercel.app',
-  // Add other domains if needed
-];
-
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
+  origin: ['https://your-vercel-app.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
 
 app.use(express.json());
@@ -35,7 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// Add at the top of your middleware
+app.enable('trust proxy');
+app.use((req, res, next) => {
+  if(process.env.NODE_ENV === 'production' && !req.secure) {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
+});
 
 // Serve uploaded files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -64,9 +66,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const port = process.env.PORT || 5000;
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 
 // Add timeout to server
