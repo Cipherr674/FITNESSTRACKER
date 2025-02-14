@@ -1,0 +1,401 @@
+/* Container for the custom workout log card */
+.workout-log-panel-custom {
+  margin: 2rem auto;
+  max-width: 1000px;
+  background: linear-gradient(145deg, #1a1a1e, #242428);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3),
+              0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  padding: 1.2rem;
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Toggle button styling */
+.toggle-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #6366f1,#8b5cf6);
+  color: #ffffff;
+  border: none;
+  padding: 3rem 1.5rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+}
+
+.toggle-btn:hover {
+  background: linear-gradient(145deg, #6366f1, #8b5cf6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.toggle-btn:active {
+  transform: translateY(0);
+}
+
+/* Content area for workouts */
+.workouts-content {
+  padding: 1.25rem;
+  max-height: 450px;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease-out;
+  scrollbar-width: thin;
+  scrollbar-color: #bb86fc #2a2a2a;
+}
+
+/* Custom scrollbar styling */
+.workouts-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.workouts-content::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+.workouts-content::-webkit-scrollbar-thumb {
+  background: #bb86fc;
+  border-radius: 3px;
+}
+
+/* Styling the list of workouts */
+.workouts-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual workout item styling */
+.workout-item {
+  background: linear-gradient(145deg, #232327, #2a2a30);
+  padding: 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.workout-item:hover {
+  background: linear-gradient(145deg, #282830, #2f2f36);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Layout for text and icons in each workout item */
+.workout-item div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #f5f5f5;
+  line-height: 1.5;
+}
+
+/* Icon styling */
+.workout-item .icon {
+  color: #bb86fc;
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.workout-item:hover .icon {
+  opacity: 1;
+}
+
+/* Fade in animation for content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #242428;
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  color: #f5f5f5;
+  animation: slideDown 0.5s ease-out;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-bottom: 16px;
+  color: #f5f5f5;
+}
+
+.modal-content form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #f5f5f5;
+}
+
+.modal-content form input,
+.modal-content form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #1a1a1e;
+  color: #f5f5f5;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modal-content form input:focus,
+.modal-content form select:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.modal-buttons button {
+  margin-left: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn.primary-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn.primary-btn:hover {
+  background-color: #006ae6;
+  transform: translateY(-2px);
+}
+
+.btn.secondary-btn {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn.secondary-btn:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.add-set-btn,
+.remove-set-btn {
+  padding: 4px 8px;
+  background: #28a745;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-set-btn {
+  background: #dc3545;
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-bottom: 12px;
+  animation: shake 0.3s ease;
+}
+
+/* Slide down animation for modal content */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shake animation for error messages */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.workout-log-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.workout-log-content {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.workout-type-selection {
+  text-align: center;
+}
+
+.workout-type-selection h2 {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.workout-type-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.workout-type-btn {
+  padding: 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(30, 30, 30, 0.8);
+  color: #fff;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.workout-type-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(40, 40, 40, 0.9);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.workout-type-btn.strength {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8));
+}
+
+.workout-type-btn.cardio {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8));
+}
+
+.workout-type-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #2d2d35;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  background: #3d3d47;
+  transform: translateY(-1px);
+}
+
+.tab-button.active {
+  background: #4f46e5;
+}
+
+.tab-button.active:hover {
+  background: #4338ca;
+}
+
+.workout-form-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

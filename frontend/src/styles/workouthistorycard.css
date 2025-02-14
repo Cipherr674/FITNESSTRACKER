@@ -1,0 +1,47 @@
+/* Workout History Card Styling */
+.workout-history-card {
+  background: linear-gradient(145deg, #16161a, #1a1a1f);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  margin: 20px auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.workout-history-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Card Heading */
+.workout-history-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Card Paragraph */
+.workout-history-card p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #e5e7eb;
+}
+
+/* Link/Button Styling */
+.card-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #ffffff;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}

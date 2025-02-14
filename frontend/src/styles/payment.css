@@ -1,0 +1,76 @@
+.subscription-container {
+    background: rgba(15, 15, 15, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    opacity: 1.9;
+  }
+  
+  .premium-status, .premium-offer {
+    text-align: center;
+  }
+  
+  .premium-button {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  }
+  
+  .premium-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+  }
+  
+  .disclaimer {
+    color: #a0aec0;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  }
+  
+  .premium-badge {
+    background: linear-gradient(135deg, #ffd700, #ffb300);
+    color: #1a1a1a;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+  }
+  
+  .loading {
+    padding: 2rem;
+    text-align: center;
+    color: #a0aec0;
+  }
+  
+  .error {
+    padding: 2rem;
+    text-align: center;
+    color: #f56565;
+  }
+  
+  .price-tag {
+    color: #8b5cf6;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    text-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+  }
+  
+  .premium-status h3 {
+    background: linear-gradient(to right, #8b5cf6, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  

@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Navbar container */
+.ant-menu-dark {
+  background: rgba(15, 15, 15, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: none !important;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 
+              0 1px 2px rgba(139, 92, 246, 0.1) inset;
+  margin-bottom: 0rem;
+  height: 80px;
+  animation: slideInDown 0.5s ease-out;
+  position: fixed;
+  border-bottom: 3px solid rgba(139, 92, 246, 0.3) !important;
+  background-image: none;
+  z-index: 1000;
+}
+
+/* Menu items container */
+.ant-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  position: relative;
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Individual menu items */
+.ant-menu-item {
+  border-radius: 0.75rem !important;
+  margin: 0 0.5rem !important;
+  padding: 0 1.5rem !important;
+  height: 45px !important;
+  line-height: 45px !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Selected menu item */
+.ant-menu-item-selected {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+  color: white !important;
+}
+
+/* Menu item hover effect */
+.ant-menu-item:hover {
+  background: rgba(139, 92, 246, 0.1) !important;
+  color: #8b5cf6 !important;
+  transform: translateY(-2px);
+}
+
+.ant-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.ant-menu-item:hover::before {
+  transform: translateX(100%);
+}
+
+/* Links within menu items */
+.ant-menu-item a {
+  color: #f5f5f5 !important;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+  transition: all 0.3s ease;
+}
+
+/* Link hover effect */
+.ant-menu-item:hover a {
+  color: #8b5cf6 !important;
+}
+
+/* Selected menu item link */
+.ant-menu-item-selected a {
+  color: white !important;
+}
+
+/* Icons within menu items */
+.ant-menu-item .anticon {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ant-menu {
+    padding: 0.5rem 1rem;
+  }
+  
+  .ant-menu-item {
+    padding: 0 1rem !important;
+    margin: 0 0.25rem !important;
+  }
+}
+
+/* Animation for menu items */
+.ant-menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover animation effect */
+.ant-menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.ant-menu-item:hover::after {
+  width: 80%;
+}
+
+/* Selected item indicator */
+.ant-menu-item-selected::after {
+  width: 80%;
+}
+
+/* Logo or brand text (if you have one) */
+.navbar-brand {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: auto;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  

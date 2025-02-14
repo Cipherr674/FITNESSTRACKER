@@ -1,0 +1,123 @@
+.admin-dashboard {
+  padding: 2rem;
+  background-color: #0a0a0c;
+  color: #f3f4f6;
+  min-height: 100vh;
+}
+
+.admin-dashboard h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.analytics-section,
+.users-section {
+  margin-bottom: 2rem;
+}
+
+.analytics-section h2,
+.users-section h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.analytics-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.analytics-card {
+  background: #16161a;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.analytics-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.users-table th,
+.users-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #27272a;
+  text-align: left;
+}
+
+.users-table th {
+  background-color: #1f1f25;
+}
+
+/* Simple Button Styles */
+.btn {
+  padding: 0.6rem 1.2rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background: #2d2d35;
+  color: #fff;
+}
+
+.btn:hover {
+  background: #3d3d47;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-view {
+  background: #2563eb;
+}
+
+.btn-view:hover {
+  background: #1d4ed8;
+}
+
+.btn-delete {
+  background: #dc2626;
+}
+
+.btn-delete:hover {
+  background: #b91c1c;
+}
+
+.btn-save {
+  background: #059669;
+}
+
+.btn-save:hover {
+  background: #047857;
+}
+
+.btn-cancel {
+  background: #4b5563;
+}
+
+.btn-cancel:hover {
+  background: #374151;
+}
+
+.btn-edit {
+  background: #2563eb;
+}
+
+.btn-edit:hover {
+  background: #1d4ed8;
+} 

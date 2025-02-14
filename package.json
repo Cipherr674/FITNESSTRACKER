@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@mistralai/mistralai": "^1.5.0",
+    "@react-spring/web": "^9.7.5",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.7",
+    "express-rate-limit": "^7.5.0",
+    "framer-motion": "^10.16.0",
+    "mongodb": "^6.13.0",
+    "mongosh": "^2.3.9",
+    "nodemailer": "^6.10.0",
+    "ogl": "^1.0.11",
+    "openai": "^4.84.0",
+    "react-intersection-observer": "^9.15.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.6"
+  }
+}

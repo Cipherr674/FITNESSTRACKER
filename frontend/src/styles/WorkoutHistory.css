@@ -1,0 +1,594 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Overall page styling */
+.workout-log-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #1b1b1f, #2b2b34);
+    min-height: 100vh;
+    color: #f3f4f6;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  .workout-log-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: pulse 10s ease-in-out infinite;
+  }
+  
+  .workout-log-page h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.025em;
+  }
+  
+  /* Month Grouping */
+  .month-group {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .month-heading {
+    color: #ffffff;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  
+  /* Grid container for workout cards */
+  .workout-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  /* Each workout card styling */
+  .workout-item {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  
+  .workout-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+  
+  .workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .workout-type-badge {
+    background: rgba(139, 92, 246, 0.2);
+    color: #f8f8f8;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.025em;
+  }
+  
+  .workout-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+  }
+  
+  .workout-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+  
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(30, 30, 30, 0.5);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+  }
+  
+  .stat-value {
+    font-weight: 500;
+    color: #e5e7eb;
+  }
+  
+  /* Expanded Modal Styles */
+  .strength-details {
+    margin: 2rem 0;
+    background: #1f1f25;
+    border-radius: 16px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  
+  .exercise-detail {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: #25252d;
+    border-radius: 12px;
+  }
+  
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  
+  .exercise-name {
+    color: #8b5cf6;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .exercise-sets {
+    color: #a78bfa;
+    font-size: 0.9rem;
+    background: rgba(139, 92, 246, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+  }
+  
+  .set-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .set-detail {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  
+  .set-number {
+    width: 100%;
+    text-align: left;
+    font-size: 0.75rem;
+    color: #a78bfa;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  
+  .set-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .set-reps, .set-weight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .set-reps span:first-child {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #8b5cf6;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  .set-reps span:last-child {
+    font-size: 0.75rem;
+    color: rgba(139, 92, 246, 0.6);
+    margin-top: 0.25rem;
+  }
+  
+  .set-weight span:first-child {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #c4b5fd;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  .set-weight span:last-child {
+    font-size: 0.75rem;
+    color: rgba(196, 181, 253, 0.6);
+    margin-top: 0.25rem;
+  }
+  
+  .set-detail:hover {
+    background: rgba(30, 30, 30, 1);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+  }
+  
+  /* Mobile Optimization */
+  @media (max-width: 768px) {
+    .set-content {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    
+    .set-reps span:first-child,
+    .set-weight span:first-child {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Modal overlay for expanded card */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Expanded card styling */
+  .expanded-card {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .expanded-card h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  /* Container for modal details */
+  .modal-details {
+    margin: 1.5rem 0;
+  }
+  
+  .modal-row {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .modal-row:last-child {
+    border-bottom: none;
+  }
+  
+  .detail-label {
+    color: #a78bfa;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .detail-value {
+    color: #e5e7eb;
+  }
+  
+  /* Button styling specifically for the modal (btn1) */
+  .btn1 {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .btn1:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  }
+  
+  .close-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  }
+  
+  /* Type Grouping */
+  .workout-type-group {
+    margin-bottom: 3rem;
+  }
+  
+  .type-heading {
+    color: #8b5cf6;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .workout-type-group.cardio .type-heading {
+    color: #10b981;
+  }
+  
+  .workout-count {
+    background: rgba(139, 92, 246, 0.1);
+    color: #a78bfa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 1rem;
+  }
+  
+  /* Type-specific badges */
+  .workout-type-badge.strength {
+    background: rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+  }
+  
+  .workout-type-badge.cardio {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+  }
+  
+  /* Cardio Specific Styling */
+  .cardio-details .detail-label {
+    color: #10b981;
+  }
+  
+  .cardio-details .icon {
+    color: #10b981;
+  }
+  
+  /* Intensity Levels */
+  .intensity-low { color: #3b82f6; }
+  .intensity-medium { color: #eab308; }
+  .intensity-high { color: #ef4444; }
+  
+  /* Type Icons */
+  .workout-type-group::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: rgba(139, 92, 246, 0.2);
+    margin: 2rem 0;
+  }
+  
+  .workout-type-group:first-child::before {
+    display: none;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .workout-log-page h1 {
+      font-size: 2rem;
+    }
+    
+    .month-heading {
+      font-size: 1.5rem;
+    }
+    
+    .workout-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Update modal overlay styles */
+  .expanded-card.strength {
+    max-width: 800px;
+    background: linear-gradient(145deg, #16161a, #1a1a1f);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    backdrop-filter: blur(20px);
+  }
+  
+  /* Form elements matching dashboard */
+  .set-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .set-input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #1f1f25;
+    color: white;
+  }
+  
+  .submit-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .cancel-btn {
+    background: #4a5568;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .expanded-card.strength {
+      width: 95%;
+      padding: 1rem;
+    }
+    
+    .set-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .set-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+  
+  /* Strength Details - Purple Harmony */
+  .set-reps span:first-child {
+    color: #8b5cf6;
+    font-weight: 600;
+  }
+  
+  .set-reps span:last-child {
+    color: rgba(139, 92, 246, 0.7);
+    font-size: 0.8rem;
+  }
+  
+  .set-weight span:first-child {
+    color: #c4b5fd;
+    font-weight: 500;
+  }
+  
+  .set-weight span:last-child {
+    color: rgba(196, 181, 253, 0.7);
+    font-size: 0.8rem;
+  }
+  
+  .set-number {
+    color: #a78bfa;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  }
+  
+  .set-detail {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    transition: all 0.2s ease;
+  }
+  
+  .set-detail:hover {
+    background: #1f1f25;
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+  }
+  
+  .exercise-header {
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+  }
+  
+  .exercise-sets {
+    background: rgba(139, 92, 246, 0.08);
+    color: #a78bfa;
+  }
+  
+  /* Typography System */
+  .workout-log-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  .workout-log-page h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  .month-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  
+  .workout-type-badge {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+  
+  .exercise-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  
+  .set-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  
+  .set-reps span:first-child,
+  .set-weight span:first-child {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  

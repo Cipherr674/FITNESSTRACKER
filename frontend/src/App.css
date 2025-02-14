@@ -1,0 +1,5 @@
+.main-content {
+  padding-top: 70px; /* Matches navbar height */
+  min-height: 100vh;
+  position: relative;
+}
