@@ -52,7 +52,12 @@ const Login = () => {
 
   return (
     <div className="login-container">
-  
+      <button 
+        onClick={() => navigate('/')}
+        className="top-right-button"
+      >
+        ← Back to Home
+      </button>
       <div className="login-image-section">
         <div className="overlay"></div>
         <div className="image-content">

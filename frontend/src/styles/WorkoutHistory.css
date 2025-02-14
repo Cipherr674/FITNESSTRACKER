@@ -41,6 +41,7 @@
     margin-bottom: 3rem;
     position: relative;
     z-index: 1;
+    padding: 1.5rem;
   }
   
   .month-heading {
@@ -590,5 +591,122 @@
   .set-weight span:first-child {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
+  }
+  
+  /* Strength Workout Cards */
+  .workout-log-page .strength-workout-card {
+    background: linear-gradient(145deg, rgba(42, 10, 69, 0.15), rgba(75, 30, 110, 0.1));
+    border: 1px solid rgba(240, 238, 241, 0.2);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  .workout-log-page .strength-workout-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(147, 51, 234, 0.1);
+  }
+  
+  .workout-log-page .strength-workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .workout-log-page .strength-workout-title {
+    color: #8d59e0;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  
+  .workout-log-page .strength-workout-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+  
+  .workout-log-page .exercise-list {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .workout-log-page .exercise-item {
+    width: 100%;
+    max-width: calc(100% - 2rem);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(42, 10, 69, 0.1);
+    border-radius: 8px;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    border: 2px solid blue !important;
+  }
+  
+  .workout-log-page .exercise-name {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+  
+  .workout-log-page .exercise-details {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(147, 51, 234, 0.5) transparent;
+    max-width: 100% !important;
+  }
+  
+  /* Scrollbar styling */
+  .workout-log-page .exercise-details::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .workout-log-page .exercise-details::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .workout-log-page .exercise-details::-webkit-scrollbar-thumb {
+    background-color: rgba(147, 51, 234, 0.5);
+    border-radius: 2px;
+  }
+  
+  .workout-log-page .exercise-stat {
+    flex: 0 0 auto;
+    min-width: 80px;
+    padding: 0 0.5rem;
+  }
+  
+  .workout-log-page .exercise-stat-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+  }
+  
+  .workout-log-page .exercise-stat-value {
+    color: #8d59e0;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    .workout-log-page .exercise-item {
+      max-width: calc(100% - 1rem);
+    }
+    
+    .workout-log-page .exercise-details {
+      gap: 0.75rem;
+      padding-bottom: 0.25rem;
+    }
+    
+    .workout-log-page .exercise-stat {
+      min-width: 70px;
+    }
   }
   

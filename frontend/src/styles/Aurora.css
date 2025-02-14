@@ -6,4 +6,75 @@
   height: 100%;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(
+    
+    rgba(11, 3, 17, 0.9),  /* #2a0a45 with 90% opacity */
+    rgba(24, 6, 37, 0.6) /* #4b1e6e with 60% opacity */
+  );
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  animation: drift 20s infinite linear;
+}
+
+.aurora-1 {
+  width: 60vw;
+  height: 60vw;
+  background: linear-gradient(
+    135deg,
+    #4b1e6e,
+    #6d3b9e
+  );
+  top: 20%;
+  left: -10%;
+}
+
+.aurora-2 {
+  width: 50vw;
+  height: 50vw;
+  background: linear-gradient(
+    135deg,
+    #4b1e6e,
+    #6d3b9e
+  );
+  top: 50%;
+  right: -15%;
+  animation-delay: -5s;
+}
+
+.aurora-3 {
+  width: 40vw;
+  height: 40vw;
+  background: linear-gradient(
+    225deg,
+    #6d3b9e,
+    #2a0a45
+  );
+  bottom: -10%;
+  left: 30%;
+  animation-delay: -10s;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(var(--x) * 0.1), calc(var(--y) * 0.1)) rotate(90deg);
+  }
+  50% {
+    transform: translate(calc(var(--x) * 0.2), calc(var(--y) * 0.2)) rotate(180deg);
+  }
+  75% {
+    transform: translate(calc(var(--x) * 0.1), calc(var(--y) * 0.1)) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
 } 

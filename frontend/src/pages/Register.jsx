@@ -101,6 +101,12 @@ const Register = () => {
 
   return (
     <div className="login-container">
+      <button
+        onClick={() => navigate('/')}
+        className="top-right-button"
+      >
+        ← Return to Homepage
+      </button>
       <div className="login-image-section">
         <div className="overlay"></div>
         <div className="image-content">
@@ -136,8 +142,6 @@ const Register = () => {
               )}
             </div>
           )}
-
-        
 
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">

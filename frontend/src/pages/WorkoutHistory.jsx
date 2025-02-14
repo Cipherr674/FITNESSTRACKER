@@ -175,7 +175,7 @@ const WorkoutHistory = () => {
                 <span className="detail-value">{selectedWorkout.duration} mins</span>
               </div>
               {selectedWorkout.type === 'strength' && (
-                <div className="strength-details">
+                <div className="strength-workout-card">
                   <h3>Exercise Breakdown</h3>
                   {selectedWorkout.exercises?.map((exercise, exIndex) => (
                     <div key={exIndex} className="exercise-detail">

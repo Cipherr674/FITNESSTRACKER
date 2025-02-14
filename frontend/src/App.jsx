@@ -17,6 +17,7 @@ import Main from "./components/Main";  // This might wrap authenticated pages
 import Sidebar from "./components/Sidebar";  // Your new sidebar component
 import PredefinedWorkoutForm from './components/PredefinedWorkoutForm';
 import WorkoutHistory from './pages/WorkoutHistory';
+import LandingPage from './components/LandingPage';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <div className="flex-grow">
           <main className="container mx-auto p-4">
             <Routes>
-             
+              <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               {/* For authenticated pages, we wrap them in the Main layout which might include other common components */}
