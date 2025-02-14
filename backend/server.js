@@ -12,11 +12,15 @@ const app = express();
 connectDB();
 
 // Middleware
+const allowedOrigins = [
+  'https://fitness-tracker-five-phi.vercel.app',
+  // Add other domains if needed
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',  // React dev server
+  origin: allowedOrigins,
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.use(express.json());
