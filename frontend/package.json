@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "serve -s build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mantine/core": "^7.16.2",
