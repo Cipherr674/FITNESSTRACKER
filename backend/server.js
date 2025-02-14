@@ -13,9 +13,10 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: ['https://your-vercel-app.vercel.app'],
-  methods: ['GET','POST','PUT','DELETE'],
-  credentials: true
+  origin: 'http://localhost:5173',  // React dev server
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
