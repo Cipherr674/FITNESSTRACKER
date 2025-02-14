@@ -13,9 +13,13 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: ['https://your-vercel-app.vercel.app'],
+  origin: [
+    'fitness-trackerv21-git-main-cipherr674s-projects.vercel.app', // Your frontend URL
+    'https://fitnesstracker-o29w.onrender.com' // Your backend URL
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
@@ -55,6 +59,27 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/subscriptions", require("./routes/subscriptionRoutes"));
+
+// Add this before other routes
+app.get('/api/healthcheck', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Server is running'
+  });
+});
+
+// Add root route
+app.get('/', (req, res) => {
+  res.redirect('/api/healthcheck');
+});
+
+// Add this after all routes to handle 404
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found'
+  });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
