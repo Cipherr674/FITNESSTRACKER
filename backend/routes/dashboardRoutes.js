@@ -5,6 +5,6 @@ const { protect } = require("../middlewares/auth");
 const { getDashboardAnalytics, getMilestones } = require("../controllers/dashboardController");
 
 router.get("/", protect, getDashboardAnalytics);
-router.get('/milestones', protect, getMilestones);
+router.get("/milestones", protect, getMilestones);
 
 module.exports = router;

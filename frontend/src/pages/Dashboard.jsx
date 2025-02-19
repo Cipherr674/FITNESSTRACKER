@@ -96,10 +96,10 @@ const Dashboard = () => {
   const fetchMilestones = useCallback(async () => {
     try {
       const token = sessionStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/milestones`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard/milestones`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setMilestones(response.data.data);
+      setMilestones(response.data.milestones);
     } catch (error) {
       console.error("Error fetching milestones:", error);
       setError('Failed to load milestones');
