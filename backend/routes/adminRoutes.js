@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { protect } = require('../middlewares/auth');
-const { getUsers, getUserID, updateUser, deleteUser, getUserWorkouts } = require('../controllers/adminController');
+const { getUsers, getUserID, updateUser, deleteUser, getUserWorkouts, getAdminAnalytics } = require('../controllers/adminController');
 const { getWorkout,getWorkoutID,updateWorkout,deleteWorkout } = require('../controllers/adminController');
 const{getAnalytics}=require('../controllers/adminAnalyticsController');
 const{authorize}=require('../middlewares/authorize');
@@ -23,5 +23,11 @@ router.get("/analytics", protect, authorize(['admin']), getAnalytics);
 
 // Add new route to get user's workouts
 router.get('/users/:userId/workouts', protect, authorize(['admin']), getUserWorkouts);
+
+router.get('/analytics', 
+  protect,
+  authorize(['admin']),
+  getAdminAnalytics
+);
 
 module.exports = router;

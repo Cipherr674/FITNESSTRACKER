@@ -4,8 +4,10 @@ import { GiMuscleUp } from 'react-icons/gi';
 import api from '../api';
 
 const RecentActivityFeed = ({ recentWorkouts = [], loading = false }) => {
+  console.log('Recent workouts:', recentWorkouts);
+
   const formatDate = (dateString) => {
-    if (!dateString) return 'No date';
+    if (!dateString || typeof dateString !== 'string') return 'No date';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       month: 'short',
@@ -16,24 +18,35 @@ const RecentActivityFeed = ({ recentWorkouts = [], loading = false }) => {
   };
 
   const renderWorkoutDetails = (workout) => {
-    if (!workout) return null;
-    if (workout.type === 'cardio') {
+    if (!workout || typeof workout !== 'object') return null;
+    
+    // Add fallbacks for all properties
+    const safeWorkout = {
+      type: workout.type || 'unknown',
+      duration: workout.duration || 0,
+      distance: workout.distance || 0,
+      points: workout.points || 0,
+      muscleGroup: workout.muscleGroup || '',
+      exercises: workout.exercises || []
+    };
+
+    if (safeWorkout.type === 'cardio') {
       return (
         <div className="activity-stats">
-          <span><FiClock /> {workout.duration || 0} mins</span>
-          <span><FiTarget /> {workout.distance || 0} km</span>
+          <span><FiClock /> {safeWorkout.duration} mins</span>
+          <span><FiTarget /> {safeWorkout.distance} km</span>
           <span className="intensity">{workout.intensity || 'N/A'}</span>
-          <span><FiAward /> {workout.points || 0} pts</span>
+          <span><FiAward /> {safeWorkout.points} pts</span>
         </div>
       );
     } else {
       // For strength workouts
       return (
         <div className="activity-stats">
-          <span className="muscle-group">{workout.muscleGroup ? formatMuscleGroup(workout.muscleGroup) : 'General'}</span>
-          <span>{(workout.exercises?.length || 0)} exercises</span>
-          <span>{getTotalSets(workout)} sets</span>
-          <span><FiAward /> {workout.points || 0} pts</span>
+          <span className="muscle-group">{safeWorkout.muscleGroup ? formatMuscleGroup(safeWorkout.muscleGroup) : 'General'}</span>
+          <span>{(safeWorkout.exercises?.length || 0)} exercises</span>
+          <span>{getTotalSets(safeWorkout)} sets</span>
+          <span><FiAward /> {safeWorkout.points} pts</span>
         </div>
       );
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/adminPanel.css';
 import AdminNavbar from '../components/AdminNavbar';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiLoader, FiAlertCircle } from 'react-icons/fi';
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("users");
@@ -18,7 +18,12 @@ const AdminPanel = () => {
   const [workoutsError, setWorkoutsError] = useState("");
 
   // Analytics state
-  const [analytics, setAnalytics] = useState(null);
+  const [analytics, setAnalytics] = useState({
+    totalUsers: null,
+    activeUsers: null,
+    newRegistrations: null,
+    workoutActivities: null
+  });
   const [analyticsLoading, setAnalyticsLoading] = useState(true);
   const [analyticsError, setAnalyticsError] = useState("");
 
@@ -34,6 +39,7 @@ const AdminPanel = () => {
   const fetchUsers = async () => {
     try {
       setUsersLoading(true);
+      const token = sessionStorage.getItem('token');
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -64,13 +70,28 @@ const AdminPanel = () => {
   const fetchAnalytics = async () => {
     try {
       setAnalyticsLoading(true);
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/analytics`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setAnalytics(response.data);
-      setAnalyticsLoading(false);
+      const token = sessionStorage.getItem('token');
+      
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/admin/analytics`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      if (response.data.success) {
+        setAnalytics({
+          totalUsers: response.data.data.totalUsers || 0,
+          activeUsers: response.data.data.activeUsers || 0,
+          newRegistrations: response.data.data.newRegistrations || 0,
+          workoutActivities: response.data.data.workoutActivities || 0
+        });
+        setAnalyticsError('');
+      }
     } catch (error) {
-      setAnalyticsError("Error fetching analytics");
+      console.error('Error:', error);
+      setAnalyticsError('Failed to load analytics data');
+    } finally {
       setAnalyticsLoading(false);
     }
   };
@@ -468,27 +489,29 @@ const AdminPanel = () => {
               </div>
               {analyticsLoading ? (
                 <div className="loading-state">
-                  <p>Loading analytics...</p>
+                  <FiLoader className="animate-spin" /> Loading analytics...
                 </div>
               ) : analyticsError ? (
                 <div className="error-state">
-                  <p>{analyticsError}</p>
+                  <FiAlertCircle /> {analyticsError}
                 </div>
               ) : (
                 <div className="analytics-grid">
-                  <div className="analytics-card elevation-1">
+                  <div className="metric-card">
                     <h3>Total Users</h3>
-                    <div className="analytics-value">
-                      <span className="number">{analytics.totalUsers}</span>
-                      <span className="label">Users</span>
-                    </div>
+                    <p>{analytics.totalUsers ?? 'N/A'}</p>
                   </div>
-                  <div className="analytics-card elevation-1">
-                    <h3>Total Workouts</h3>
-                    <div className="analytics-value">
-                      <span className="number">{analytics.totalWorkouts}</span>
-                      <span className="label">Workouts</span>
-                    </div>
+                  <div className="metric-card">
+                    <h3>Active Users</h3>
+                    <p>{analytics.activeUsers ?? 'N/A'}</p>
+                  </div>
+                  <div className="metric-card">
+                    <h3>New Registrations</h3>
+                    <p>{analytics.newRegistrations ?? 'N/A'}</p>
+                  </div>
+                  <div className="metric-card">
+                    <h3>Workout Activities</h3>
+                    <p>{analytics.workoutActivities ?? 'N/A'}</p>
                   </div>
                 </div>
               )}

@@ -403,12 +403,12 @@ body {
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #351b41, #926ce9);
   flex: 2;
 }
 
 .secondary-btn {
-  background: linear-gradient(135deg, #4b5563, #6b7280);
+  background: linear-gradient(135deg, #351b41, #9171da);
   flex: 2;
 }
 

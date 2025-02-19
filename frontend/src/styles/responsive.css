@@ -1,0 +1,34 @@
+/* Global Mobile Overrides */
+@media (max-width: 768px) {
+  /* Improve touch interactions */
+  button, .btn {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Prevent zoom on input */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Hide decorative elements */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  /* Show mobile elements */
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* iPhone Notch Safe Areas */
+@supports (padding: max(0px)) {
+  .safe-area-padding {
+    padding: 
+      max(1rem, env(safe-area-inset-top)) 
+      max(1rem, env(safe-area-inset-right)) 
+      max(1rem, env(safe-area-inset-bottom)) 
+      max(1rem, env(safe-area-inset-left));
+  }
+} 

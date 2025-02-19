@@ -158,5 +158,42 @@ exports.getUserWorkouts = async (req, res) => {
   }
 };
 
+// Get admin analytics
+exports.getAdminAnalytics = async (req, res) => {
+  try {
+    // Get user statistics
+    const totalUsers = await User.countDocuments();
+    const activeUsers = await User.countDocuments({ lastLogin: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } });
+    const newRegistrations = await User.countDocuments({ createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } });
+    
+    // Get workout statistics
+    const workoutActivities = await Workout.countDocuments();
+
+    // Add console log to verify data
+    console.log('Admin Analytics Data:', {
+      totalUsers,
+      activeUsers,
+      newRegistrations,
+      workoutActivities
+    });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        totalUsers,
+        activeUsers: activeUsers || 0, // Ensure numbers
+        newRegistrations: newRegistrations || 0,
+        workoutActivities: workoutActivities || 0
+      }
+    });
+  } catch (error) {
+    console.error('Admin analytics error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to load admin analytics'
+    });
+  }
+};
+
 
 

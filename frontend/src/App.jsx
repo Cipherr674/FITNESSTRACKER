@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminRoute from './components/AdminRoute'; // Import the admin route wrapper
 import { Toaster } from 'react-hot-toast';
@@ -21,6 +21,16 @@ import LandingPage from './components/LandingPage';
 
 
 function App() {
+  useEffect(() => {
+    window.addEventListener('popstate', () => {
+      const token = sessionStorage.getItem('token');
+      if (!token && window.location.pathname !== '/') {
+        window.history.replaceState(null, '', '/');
+        window.location.reload();
+      }
+    });
+  }, []);
+
   return (
     <>
       <Toaster position="top-right" />

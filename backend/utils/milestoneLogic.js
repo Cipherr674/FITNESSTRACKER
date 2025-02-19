@@ -25,19 +25,26 @@ const MILESTONES = [
   }
 ];
 
-exports.calculateMilestones = (user) => {
+const calculateMilestones = (user) => {
   return MILESTONES.map(milestone => {
     const currentValue = {
-      strength: user.strengthPoints,
-      cardio: user.cardioPoints,
-      streak: user.streaks
+      strength: user.strengthPoints || 0,
+      cardio: user.cardioPoints || 0,
+      streak: user.streaks || 0
     }[milestone.type];
-
+    
+    const progress = Math.min(
+      (currentValue / milestone.threshold) * 100, 
+      100
+    );
+    
     return {
       ...milestone,
       achieved: currentValue >= milestone.threshold,
-      progress: Math.min((currentValue / milestone.threshold) * 100, 100),
+      progress: Number(progress.toFixed(2)),
       currentValue
     };
   });
-}; 
+};
+
+exports.calculateMilestones = calculateMilestones; 

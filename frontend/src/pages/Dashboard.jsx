@@ -54,16 +54,18 @@ const Dashboard = () => {
 
       const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
+        params: { timestamp: Date.now() }
       });
+      
       setAnalytics(prev => ({
         ...prev,
-        recentWorkouts: res.data.recentWorkouts || [],
-        weeklyProgress: res.data.weeklyProgress || [],
-        strengthRank: res.data.strengthRank || 'Iron',
-        cardioRank: res.data.cardioRank || 'Jogger',
-        totalStrengthPoints: res.data.totalStrengthPoints || 0,
-        totalCardioPoints: res.data.totalCardioPoints || 0,
-        numberOfWorkouts: res.data.numberOfWorkouts || 0
+        recentWorkouts: res.data.analytics?.recentWorkouts || [],
+        weeklyProgress: res.data.analytics?.weeklyProgress || [],
+        strengthRank: res.data.analytics?.strengthRank || 'Iron',
+        cardioRank: res.data.analytics?.cardioRank || 'Jogger',
+        totalStrengthPoints: res.data.analytics?.totalStrengthPoints || 0,
+        totalCardioPoints: res.data.analytics?.totalCardioPoints || 0,
+        numberOfWorkouts: res.data.analytics?.numberOfWorkouts || 0
       }));
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -106,14 +108,13 @@ const Dashboard = () => {
   const fetchMilestones = useCallback(async () => {
     try {
       const token = sessionStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard/milestones`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard/milestones`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setMilestones(response.data.milestones || []);
+      console.log('Milestones response:', res.data);
+      setMilestones(res.data.data || []);
     } catch (error) {
       console.error("Error fetching milestones:", error);
-      setError('Failed to load milestones');
-      setMilestones([]);
     }
   }, []);
     
@@ -123,13 +124,13 @@ const Dashboard = () => {
 
   const handleWorkoutLogged = useCallback(() => {
     setIsUpdating(true);
-    Promise.all([
-      fetchDashboardData(),
-      fetchDashboardStreak(),
-      fetchMilestones()
-    ]).finally(() => {
-      setIsUpdating(false);
-    });
+    fetchDashboardData()
+      .then(() => fetchDashboardStreak())
+      .then(() => fetchMilestones())
+      .catch(error => console.error("Update error:", error))
+      .finally(() => {
+        setIsUpdating(false);
+      });
   }, [fetchDashboardData, fetchDashboardStreak, fetchMilestones]);
 
   const calculateRankProgress = (currentPoints, currentRank, ranks, thresholds, maxRank) => {
@@ -241,7 +242,8 @@ const Dashboard = () => {
         <div className="dashboard-content">
           <div className="dashboard-grid">
             <RecentActivityFeed 
-              recentWorkouts={analytics.recentWorkouts || []} 
+              key={analytics.numberOfWorkouts} 
+              recentWorkouts={analytics.recentWorkouts} 
               loading={isUpdating}
             />
             <ProgressRoadmap milestones={milestones} />
