@@ -13,7 +13,7 @@ const WorkoutHistory = () => {
     const token = sessionStorage.getItem('token');
     const fetchWorkouts = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/workouts/history`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/workouts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         // Sort workouts by date (newest first)
