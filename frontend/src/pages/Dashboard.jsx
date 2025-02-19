@@ -54,9 +54,13 @@ const Dashboard = () => {
       const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.data || typeof res.data !== 'object') {
+        throw new Error('Invalid API response structure');
+      }
+      
       setAnalytics({
-        recentWorkouts: res.data.recentWorkouts || [],
-        weeklyProgress: res.data.weeklyProgress || [],
+        recentWorkouts: Array.isArray(res.data.recentWorkouts) ? res.data.recentWorkouts : [],
+        weeklyProgress: Array.isArray(res.data.weeklyProgress) ? res.data.weeklyProgress : [],
         strengthRank: res.data.strengthRank || 'Iron',
         cardioRank: res.data.cardioRank || 'Jogger',
         totalStrengthPoints: res.data.totalStrengthPoints || 0,
@@ -65,6 +69,7 @@ const Dashboard = () => {
       });
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
+      setAnalytics({}); // Reset to empty state
       setError('Failed to load dashboard data');
     } finally {
       setLoading(false);
@@ -260,7 +265,7 @@ const Dashboard = () => {
         <div className="dashboard-content">
           <div className="dashboard-grid">
             <RecentActivityFeed 
-              recentWorkouts={analytics.recentWorkouts || []} 
+              recentWorkouts={Array.isArray(analytics.recentWorkouts) ? analytics.recentWorkouts : []} 
             />
             <ProgressRoadmap milestones={milestones} />
           </div>
