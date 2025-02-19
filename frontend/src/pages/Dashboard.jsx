@@ -10,6 +10,7 @@ import StreakSettings from '../components/StreakSettings';
 import WorkoutLogPanel from '../components/WorkoutLogPanel';
 import Aurora from '../components/Aurora';
 import { ProgressRoadmap } from '../components/ProgressRoadmap';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Dashboard = () => {
   const { user } = useAuth();
