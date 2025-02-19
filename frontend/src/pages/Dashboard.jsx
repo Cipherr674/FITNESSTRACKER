@@ -51,7 +51,7 @@ const Dashboard = () => {
       const token = sessionStorage.getItem('token');
       if (!token) return;
 
-      const res = await axios.get("http://localhost:5000/api/dashboard", {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAnalytics(prev => ({...prev, ...res.data.analytics}));

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import api from '../api';
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -13,9 +13,7 @@ export const AuthProvider = ({ children }) => {
   // Function to fetch user profile
   const fetchUserProfile = async (token) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/auth/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await api.get("/auth/profile");
       if (response.data && response.data.user) {
         setUser(response.data.user);
         return response.data.user;
@@ -50,13 +48,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const loginRes = await axios.post("http://localhost:5000/api/auth/login", { email, password });
-      if (loginRes.data && loginRes.data.token) {
+      const response = await api.post('/auth/login', { email, password });
+      if (response.data && response.data.token) {
         // Store token and update state
-        sessionStorage.setItem("token", loginRes.data.token);
-        setToken(loginRes.data.token);
+        sessionStorage.setItem("token", response.data.token);
+        setToken(response.data.token);
         // Fetch user profile with the new token
-        const userProfile = await fetchUserProfile(loginRes.data.token);
+        const userProfile = await fetchUserProfile(response.data.token);
         if (userProfile) {
           // Redirect based on role: admin users go to /admin, others to /dashboard.
           navigate(userProfile.role === "admin" ? "/admin" : "/dashboard");

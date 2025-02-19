@@ -15,9 +15,10 @@ const Statistics = () => {
     const fetchStatistics = async () => {
       try {
         const token = sessionStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/analytics', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/analytics`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setAnalytics(response.data);
       } catch (err) {
         setError('Failed to load statistics');

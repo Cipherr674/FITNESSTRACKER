@@ -56,12 +56,16 @@ const Profile = () => {
     }
     try {
       const token = sessionStorage.getItem("token");
-      const response = await axios.put("http://localhost:5000/api/users/profile", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_BASE_URL}/users/profile`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (response.data.user) {
         setPreview(`http://localhost:5000${response.data.user.profilePicture}`);
       }
@@ -71,6 +75,17 @@ const Profile = () => {
       setMessage(err.response?.data?.error || "Error updating profile.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/users/profile`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (err) {
+      console.error(err);
     }
   };
 

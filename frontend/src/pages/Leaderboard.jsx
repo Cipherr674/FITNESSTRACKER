@@ -1,6 +1,6 @@
 // src/components/Leaderboard.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import '../styles/leaderboard.css';
 import Aurora from '../components/Aurora';
 
@@ -12,10 +12,7 @@ const Leaderboard = () => {
   // Leaderboard.jsx
   const fetchLeaderboard = async () => {
     try {
-      const token = sessionStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/leaderboard", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await api.get("/leaderboard");
       
       // Use correct response structure
       const rawData = response.data.leaderboard || [];

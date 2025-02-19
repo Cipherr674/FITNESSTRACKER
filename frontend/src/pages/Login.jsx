@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import "../styles/login.css"; // Your custom CSS for login
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 import workoutImage from "../assets/workout-bg.jpg"; // You'll need to add this image
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -40,6 +41,10 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+        { email: formData.email, password: formData.password }
+      );
       // Use the login function from AuthContext directly
       await login(formData.email, formData.password);
       // Navigation is handled inside the login function

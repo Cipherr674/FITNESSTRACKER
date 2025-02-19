@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from './api';
 import '../styles/payment.css';
 
 const SubscriptionFlow = ({ user }) => {
@@ -11,7 +11,7 @@ const SubscriptionFlow = ({ user }) => {
   useEffect(() => {
     const checkSubscription = async () => {
       try {
-        const res = await axios.get('/api/users/subscription');
+        const res = await api.get('/users/subscription');
         setSubscription(res.data);
       } catch (err) {
         console.error('Subscription check failed:', err);
@@ -50,7 +50,7 @@ const SubscriptionFlow = ({ user }) => {
       image: '/logo.png',
       handler: async (response) => {
         try {
-          await axios.post('http://localhost:5000/api/subscriptions/verify', {
+          await api.post('/subscriptions/verify', {
             paymentId: response.razorpay_payment_id
           });
           setSubscription({
@@ -72,6 +72,15 @@ const SubscriptionFlow = ({ user }) => {
     } catch (err) {
       console.error('Razorpay initialization failed:', err);
       alert('Payment system error. Please try again later.');
+    }
+  };
+
+  const processPayment = async () => {
+    try {
+      const response = await api.post('/payments/create-subscription');
+      // ...
+    } catch (err) {
+      // ...
     }
   };
 
