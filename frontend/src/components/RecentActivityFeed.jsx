@@ -75,7 +75,7 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
     <div className="recent-activity">
       <h2>Recent Activity</h2>
       <div className="activity-list">
-        {recentWorkouts.map((workout) => (
+        {recentWorkouts?.map((workout) => (
           <div key={workout._id} className={`activity-item ${workout.type}`}>
             {getWorkoutIcon(workout.type)}
             <div className="activity-details">
