@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminRoute from './components/AdminRoute'; // Import the admin route wrapper
 import { Toaster } from 'react-hot-toast';
-import ErrorBoundary from './components/ErrorBoundary';
 
 // Import your pages
 import Login from "./pages/Login";
@@ -37,11 +36,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               {/* For authenticated pages, we wrap them in the Main layout which might include other common components */}
-              <Route path="/dashboard" element={
-                <ErrorBoundary>
-                  <Main child={<Dashboard />} />
-                </ErrorBoundary>
-              } />
+              <Route path="/dashboard" element={<Main child={<Dashboard />} />} />
               <Route path="/leaderboard" element={<Main child={<Leaderboard />} />} />
               <Route path="/profile" element={<Main child={<Profile />} />} />
               <Route path="/prefilled-workout" element={<Main child={<PredefinedWorkoutForm />} />} />

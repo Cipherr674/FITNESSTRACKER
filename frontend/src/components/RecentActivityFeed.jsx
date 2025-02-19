@@ -53,13 +53,10 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
   };
 
   const getWorkoutTitle = (workout) => {
-    if (!workout) return 'Unknown Workout';
     if (workout.type === 'cardio') {
-      return workout.name || 'Cardio Session';
+      return workout.name;
     } else {
-      return workout.muscleGroup 
-        ? `${formatMuscleGroup(workout.muscleGroup)} Workout`
-        : 'Strength Training';
+      return `${formatMuscleGroup(workout.muscleGroup)} Workout`;
     }
   };
 
@@ -82,13 +79,13 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
     <div className="recent-activity">
       <h2>Recent Activity</h2>
       <div className="activity-list">
-        {(Array.isArray(recentWorkouts) ? recentWorkouts : []).map((workout) => (
-          <div key={workout?._id || Math.random()} className={`activity-item ${workout?.type || 'unknown'}`}>
-            {getWorkoutIcon(workout?.type)}
+        {recentWorkouts?.map((workout) => (
+          <div key={workout._id} className={`activity-item ${workout.type}`}>
+            {getWorkoutIcon(workout.type)}
             <div className="activity-details">
               <div className="activity-header">
-                <h3>{workout ? getWorkoutTitle(workout) : 'Unknown Workout'}</h3>
-                <span className="workout-date">{workout?.date ? formatDate(workout.date) : 'Unknown Date'}</span>
+                <h3>{getWorkoutTitle(workout)}</h3>
+                <span className="workout-date">{formatDate(workout.date)}</span>
               </div>
               {renderWorkoutDetails(workout)}
             </div>
