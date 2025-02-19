@@ -1,4 +1,4 @@
-const ProgressRoadmap = ({ milestones = [] }) => {
+export const ProgressRoadmap = ({ milestones = [] }) => {
   return (
     <div className="progress-roadmap">
       <h3>Milestones</h3>
