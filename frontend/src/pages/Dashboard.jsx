@@ -67,7 +67,7 @@ const Dashboard = () => {
     try {
       const token = sessionStorage.getItem('token');
       if (!token) return;
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/streak', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/streak`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDashboardStreak(response.data.streak);
@@ -94,16 +94,16 @@ const Dashboard = () => {
   }, [user, fetchDashboardData, fetchDashboardStreak]);
 
   const fetchMilestones = useCallback(async () => {
-      try {
-        const token = sessionStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/milestones', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setMilestones(response.data.data);
-      } catch (error) {
-        console.error("Error fetching milestones:", error);
+    try {
+      const token = sessionStorage.getItem('token');
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/milestones`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setMilestones(response.data.data);
+    } catch (error) {
+      console.error("Error fetching milestones:", error);
       setError('Failed to load milestones');
-      }
+    }
   }, []);
     
   useEffect(() => {
