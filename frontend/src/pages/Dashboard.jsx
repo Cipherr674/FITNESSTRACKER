@@ -67,7 +67,7 @@ const Dashboard = () => {
     try {
       const token = sessionStorage.getItem('token');
       if (!token) return;
-      const response = await axios.get('http://localhost:5000/api/streak', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/streak', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDashboardStreak(response.data.streak);
@@ -96,7 +96,7 @@ const Dashboard = () => {
   const fetchMilestones = useCallback(async () => {
       try {
         const token = sessionStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/dashboard/milestones', {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/milestones', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setMilestones(response.data.data);
