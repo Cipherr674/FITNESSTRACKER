@@ -9,6 +9,7 @@ import { FiPlus, FiList } from 'react-icons/fi';
 import StreakSettings from '../components/StreakSettings';
 import WorkoutLogPanel from '../components/WorkoutLogPanel';
 import Aurora from '../components/Aurora';
+import ProgressRoadmap from '../components/ProgressRoadmap';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -107,10 +108,11 @@ const Dashboard = () => {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard/milestones`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setMilestones(response.data.milestones);
+      setMilestones(response.data.milestones || []);
     } catch (error) {
       console.error("Error fetching milestones:", error);
       setError('Failed to load milestones');
+      setMilestones([]);
     }
   }, []);
     
@@ -153,31 +155,6 @@ const Dashboard = () => {
     ['Jogger', 'Racer', 'Sprinter', 'Marathoner', 'Apex Athlete'],
     { Jogger: 0, Racer: 300, Sprinter: 600, Marathoner: 1000, 'Apex Athlete': 1500 },
     'Apex Athlete'
-  );
-
-  const ProgressRoadmap = ({ milestones }) => (
-    <div className="progress-roadmap">
-      <h3>Your Fitness Journey</h3>
-      <div className="timeline">
-        {milestones.map((milestone) => (
-          <div key={milestone.id} className={`milestone ${milestone.achieved ? 'achieved' : ''}`}>
-            <div className="icon">{milestone.achieved ? '🎯' : '⌛'}</div>
-            <div className="details">
-              <h4>{milestone.title}</h4>
-              <p>{milestone.description}</p>
-              {!milestone.achieved && (
-                <div className="progress">
-                  <div 
-                    className="progress-bar" 
-                    style={{ width: `${milestone.progress}%` }}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 
   if (loading) {
@@ -262,7 +239,9 @@ const Dashboard = () => {
             <RecentActivityFeed 
               recentWorkouts={analytics.recentWorkouts || []} 
             />
-            <ProgressRoadmap milestones={milestones} />
+            <ErrorBoundary>
+              <ProgressRoadmap milestones={milestones} />
+            </ErrorBoundary>
           </div>
         </div>
         
