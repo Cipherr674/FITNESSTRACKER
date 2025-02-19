@@ -15,10 +15,11 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
   };
 
   const renderWorkoutDetails = (workout) => {
+    if (!workout) return null;
     if (workout.type === 'cardio') {
       return (
         <div className="activity-stats">
-          <span><FiClock /> {workout.duration} mins</span>
+          <span><FiClock /> {workout.duration || 0} mins</span>
           {workout.distance && <span><FiTarget /> {workout.distance} km</span>}
           <span className="intensity">{workout.intensity}</span>
           <span><FiAward /> {workout.points} pts</span>
@@ -45,7 +46,10 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
   };
 
   const getTotalSets = (workout) => {
-    return workout.exercises.reduce((total, exercise) => total + exercise.sets.length, 0);
+    if (!workout?.exercises) return 0;
+    return workout.exercises.reduce((total, exercise) => 
+      total + (exercise.sets?.length || 0), 0
+    );
   };
 
   const getWorkoutTitle = (workout) => {

@@ -54,7 +54,15 @@ const Dashboard = () => {
       const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setAnalytics(prev => ({...prev, ...res.data.analytics}));
+      setAnalytics({
+        recentWorkouts: res.data.recentWorkouts || [],
+        weeklyProgress: res.data.weeklyProgress || [],
+        strengthRank: res.data.strengthRank || 'Iron',
+        cardioRank: res.data.cardioRank || 'Jogger',
+        totalStrengthPoints: res.data.totalStrengthPoints || 0,
+        totalCardioPoints: res.data.totalCardioPoints || 0,
+        numberOfWorkouts: res.data.numberOfWorkouts || 0
+      });
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
       setError('Failed to load dashboard data');
@@ -251,7 +259,9 @@ const Dashboard = () => {
 
         <div className="dashboard-content">
           <div className="dashboard-grid">
-            <RecentActivityFeed recentWorkouts={analytics.recentWorkouts} />
+            <RecentActivityFeed 
+              recentWorkouts={analytics.recentWorkouts || []} 
+            />
             <ProgressRoadmap milestones={milestones} />
           </div>
         </div>
