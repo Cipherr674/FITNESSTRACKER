@@ -3,8 +3,9 @@ import { FiActivity, FiClock, FiAward, FiTarget } from 'react-icons/fi';
 import { GiMuscleUp } from 'react-icons/gi';
 import api from '../api';
 
-const RecentActivityFeed = ({ recentWorkouts = [] }) => {
+const RecentActivityFeed = ({ recentWorkouts = [], loading = false }) => {
   const formatDate = (dateString) => {
+    if (!dateString) return 'No date';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       month: 'short',
@@ -20,19 +21,19 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
       return (
         <div className="activity-stats">
           <span><FiClock /> {workout.duration || 0} mins</span>
-          {workout.distance && <span><FiTarget /> {workout.distance} km</span>}
-          <span className="intensity">{workout.intensity}</span>
-          <span><FiAward /> {workout.points} pts</span>
+          <span><FiTarget /> {workout.distance || 0} km</span>
+          <span className="intensity">{workout.intensity || 'N/A'}</span>
+          <span><FiAward /> {workout.points || 0} pts</span>
         </div>
       );
     } else {
       // For strength workouts
       return (
         <div className="activity-stats">
-          <span className="muscle-group">{formatMuscleGroup(workout.muscleGroup)}</span>
-          <span>{workout.exercises.length} exercises</span>
+          <span className="muscle-group">{workout.muscleGroup ? formatMuscleGroup(workout.muscleGroup) : 'General'}</span>
+          <span>{(workout.exercises?.length || 0)} exercises</span>
           <span>{getTotalSets(workout)} sets</span>
-          <span><FiAward /> {workout.points} pts</span>
+          <span><FiAward /> {workout.points || 0} pts</span>
         </div>
       );
     }
@@ -70,7 +71,11 @@ const RecentActivityFeed = ({ recentWorkouts = [] }) => {
     return (
       <div className="recent-activity">
         <h2>Recent Activity</h2>
-        <p className="no-activity">No recent workouts logged</p>
+        {loading ? (
+          <p className="no-activity">Loading activities...</p>
+        ) : (
+          <p className="no-activity">No recent workouts logged</p>
+        )}
       </div>
     );
   }

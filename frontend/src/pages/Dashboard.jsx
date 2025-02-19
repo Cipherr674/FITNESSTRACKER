@@ -55,7 +55,8 @@ const Dashboard = () => {
       const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setAnalytics({
+      setAnalytics(prev => ({
+        ...prev,
         recentWorkouts: res.data.recentWorkouts || [],
         weeklyProgress: res.data.weeklyProgress || [],
         strengthRank: res.data.strengthRank || 'Iron',
@@ -63,7 +64,7 @@ const Dashboard = () => {
         totalStrengthPoints: res.data.totalStrengthPoints || 0,
         totalCardioPoints: res.data.totalCardioPoints || 0,
         numberOfWorkouts: res.data.numberOfWorkouts || 0
-      });
+      }));
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
       setError('Failed to load dashboard data');
@@ -122,11 +123,14 @@ const Dashboard = () => {
 
   const handleWorkoutLogged = useCallback(() => {
     setIsUpdating(true);
-    fetchDashboardData();
-    fetchDashboardStreak().finally(() => {
+    Promise.all([
+      fetchDashboardData(),
+      fetchDashboardStreak(),
+      fetchMilestones()
+    ]).finally(() => {
       setIsUpdating(false);
     });
-  }, [fetchDashboardData, fetchDashboardStreak]);
+  }, [fetchDashboardData, fetchDashboardStreak, fetchMilestones]);
 
   const calculateRankProgress = (currentPoints, currentRank, ranks, thresholds, maxRank) => {
     const currentThreshold = thresholds[currentRank];
@@ -238,6 +242,7 @@ const Dashboard = () => {
           <div className="dashboard-grid">
             <RecentActivityFeed 
               recentWorkouts={analytics.recentWorkouts || []} 
+              loading={isUpdating}
             />
             <ProgressRoadmap milestones={milestones} />
           </div>
