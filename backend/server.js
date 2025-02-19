@@ -13,12 +13,9 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: [
-    'fitness-trackerv21-git-main-cipherr674s-projects.vercel.app', // Your frontend URL
-    'https://fitnesstracker-o29w.onrender.com' // Your backend URL
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: 'http://localhost:5173',  // React dev server
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -34,14 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Add at the top of your middleware
-app.enable('trust proxy');
-app.use((req, res, next) => {
-  if(process.env.NODE_ENV === 'production' && !req.secure) {
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
-  next();
-});
+
 
 // Serve uploaded files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -60,27 +50,6 @@ app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/subscriptions", require("./routes/subscriptionRoutes"));
 
-// Add this before other routes
-app.get('/api/healthcheck', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    message: 'Server is running'
-  });
-});
-
-// Add root route
-app.get('/', (req, res) => {
-  res.redirect('/api/healthcheck');
-});
-
-// Add this after all routes to handle 404
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
-  });
-});
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Global error handler:', err);
@@ -91,9 +60,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-const port = process.env.PORT || 5000;
-const server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 // Add timeout to server
