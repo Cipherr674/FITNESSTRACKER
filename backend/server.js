@@ -14,10 +14,12 @@ connectDB();
 // Middleware
 const corsOptions = {
   origin: [
-    'https://fitnesstracker-frontend-m4f5.onrender.com', // Add your production frontend URL
-    'http://localhost:3000' // Keep for local development
+    'https://fitnesstracker-frontend-m4f5.onrender.com',
+    'http://localhost:3000'
   ],
-  optionsSuccessStatus: 200
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
 app.use(cors(corsOptions));
 

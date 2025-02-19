@@ -71,7 +71,7 @@ function Register() {
     try {
       // Registration API call.
       const res = await axios.post(
-        'http://localhost:5000/api/auth/register',
+        `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
         payload,
         { headers: { 'Content-Type': 'application/json' } }
       );

@@ -43,7 +43,7 @@ const PredefinedWorkoutForm = () => {
 
     try {
       const token = sessionStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/workouts', workoutData, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/workouts`, workoutData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/dashboard');

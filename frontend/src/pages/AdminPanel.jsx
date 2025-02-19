@@ -34,7 +34,7 @@ const AdminPanel = () => {
   const fetchUsers = async () => {
     try {
       setUsersLoading(true);
-      const response = await axios.get("http://localhost:5000/api/admin/users", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data.users);
@@ -49,7 +49,7 @@ const AdminPanel = () => {
   const fetchWorkouts = async () => {
     try {
       setWorkoutsLoading(true);
-      const response = await axios.get("http://localhost:5000/api/admin/workouts", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/workouts`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWorkouts(response.data.workouts);
@@ -64,10 +64,10 @@ const AdminPanel = () => {
   const fetchAnalytics = async () => {
     try {
       setAnalyticsLoading(true);
-      const response = await axios.get("http://localhost:5000/api/admin/analytics", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/analytics`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setAnalytics(response.data.data);
+      setAnalytics(response.data);
       setAnalyticsLoading(false);
     } catch (error) {
       setAnalyticsError("Error fetching analytics");

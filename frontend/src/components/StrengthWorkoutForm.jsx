@@ -46,7 +46,7 @@ const StrengthWorkoutForm = ({ onClose, onWorkoutLogged, onBack }) => {
 
   const fetchExercises = async (muscle) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/workouts/predefined?muscle=${muscle}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/workouts/predefined?muscle=${muscle}`);
       if (response.data.success && Array.isArray(response.data.workouts)) {
         setPredefinedExercises(response.data.workouts);
       } else {
@@ -125,7 +125,7 @@ const StrengthWorkoutForm = ({ onClose, onWorkoutLogged, onBack }) => {
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/workouts/strength',
+        `${import.meta.env.VITE_API_BASE_URL}/workouts/strength`,
         {
           type: 'strength',
           muscleGroup,

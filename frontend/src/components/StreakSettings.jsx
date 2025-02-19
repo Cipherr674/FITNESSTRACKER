@@ -20,7 +20,7 @@ const StreakSettings = () => {
   const fetchStreak = async () => {
     try {
       const token = sessionStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/streak', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/streak`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCurrentStreak(response.data.streak);
@@ -49,7 +49,7 @@ const StreakSettings = () => {
       }
 
       const response = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        `${import.meta.env.VITE_API_BASE_URL}/users/profile`,
         { streakFrozen: newFreeze },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -83,7 +83,7 @@ const StreakSettings = () => {
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        `${import.meta.env.VITE_API_BASE_URL}/users/profile`,
         { restDays },
         { headers: { Authorization: `Bearer ${token}` } }
       );

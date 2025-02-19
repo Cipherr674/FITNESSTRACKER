@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiActivity, FiClock, FiAward, FiTarget } from 'react-icons/fi';
 import { GiMuscleUp } from 'react-icons/gi';
+import api from '../api';
 
 const RecentActivityFeed = ({ recentWorkouts = [] }) => {
   const formatDate = (dateString) => {

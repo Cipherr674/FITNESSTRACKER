@@ -53,7 +53,7 @@ const CardioWorkoutForm = ({ onClose, onWorkoutLogged, onBack }) => {
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/workouts/cardio',
+        `${import.meta.env.VITE_API_BASE_URL}/workouts/cardio`,
         {
           ...formData,
           duration: Number(formData.duration),

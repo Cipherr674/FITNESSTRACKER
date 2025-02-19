@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StrengthWorkoutForm from './StrengthWorkoutForm';
 import CardioWorkoutForm from './CardioWorkoutForm';
 import '../styles/workoutLogPanel.css';
+import api from '../api';
 
 const WorkoutLogPanel = ({ onClose, onWorkoutLogged }) => {
   const [workoutType, setWorkoutType] = useState(null);
